@@ -97,7 +97,45 @@ class SortingRobot:
         Sort the robot's list.
         """
         # Fill this out
-        pass
+        self.set_light_on() # Turn robot on
+        while self.can_move_right():
+            self.swap_item() # pick up item and move right
+            self.move_right()
+                
+            if self.compare_item() == 1: # if held item is greater than in front
+                self.swap_item()
+                self.move_left()
+                self.swap_item()
+                self.move_right()
+                
+            if self.compare_item() == -1: # if held item is less than in front
+                self.move_left()
+                self.swap_item()
+                self.move_right()
+            
+            if self.compare_item() == 0: # if items are equal
+                self.move_left()
+                self.swap_item()
+                self.move_right()
+
+            if self.compare_item() == None:
+                self.swap_item()
+                self.move_right()
+                
+        if self.light_is_on() and self.can_move_right() is False:
+            while self.can_move_left() == True:
+                self.move_left()
+
+        # we cant access or set variables,
+        # we must sort the list by using only the robots commands
+        # robot can:
+        # see if it can go right
+        # move right
+        # see if it can go left
+        # move left
+        # compare_item (compares current item with next item)
+        # swap_item (swaps held item with current item)
+        # sounds like a good problem for insertion sort
 
 
 if __name__ == "__main__":
